@@ -34,8 +34,7 @@ Project 5: Part 1 / 4
 #include <random>
 #include <ctime>
 
-namespace FormTask
-{
+//namespace FormTask
 struct Form 
 {
     bool isVisible;
@@ -84,8 +83,8 @@ struct Form
     */
     TextField fullName;
 
+    void mainForm(Form& );
     bool mouseOver (TextField fullName);
-    bool formIsVisible (std::string formID);
     void clearAllCheckBoxes (Form f);
     void checkABox (CheckBox& )
     {
@@ -98,31 +97,42 @@ struct Form
     }
 
     Form();
+    Form(int );
+
+    ~Form();
 };
 Form::Form() :
             isVisible ( true ),
             formID ( "UserName" ),
-            fields ( 4 ),
+            fields ( 2 ),
             fullName ( TextField() ) 
 { } 
+
+Form::Form(int nbrFields) :
+            isVisible ( true ),
+            formID ( "Fields" ),
+            fields ( nbrFields ),
+            fullName (  ) 
+{ } 
+
 Form::TextField::TextField() : 
                             x ( 80 ), y ( 160 ), w ( 400 ), h ( 90 ),
                             alpha ( 32 ),
                             fieldID ( "FullName" )
 { }
-//Implementation 4
+
+Form::~Form() 
+{
+std::cout << "\nForm with " << fields << " fields Destructing...\n";
+}
+
+//Implementations 4
 bool Form::mouseOver (TextField) 
 {
     //return true when mouse is over a certain field
     return {};
 }
-bool Form::formIsVisible (std::string ) 
-{
-    //check if form is visibl
-    //make it visible if not
-    //return a state
-    return {};
-}
+
 bool Form::CheckBox::animateCheckBox (std::string , CheckBox& check_box, float anim_time )
 {
     /*
@@ -133,6 +143,7 @@ bool Form::CheckBox::animateCheckBox (std::string , CheckBox& check_box, float a
     float startingSize = check_box.size;
     float shrinkingSize = startingSize;
     std::string unicode = "\u2593\n";
+    
     while ((check_box.isChecked) && (shrinkingSize > 0.01f)) 
     {
        shrinkingSize -= (anim_time/60.0f);
@@ -149,17 +160,16 @@ bool Form::CheckBox::animateCheckBox (std::string , CheckBox& check_box, float a
     }; 
     return true; // vanished!
 }
-int main()
+
+void Form::mainForm(Form& formData)
 {
-    Form submitUserData;
     std::cout << "Memory used by Form -> " << sizeof(Form) << " bytes \n" ;
-    submitUserData.print_IDs();
-    submitUserData.checkABox(submitUserData.fullName.checkBox);
-    submitUserData.fullName.checkBox.animateCheckBox("name", submitUserData.fullName.checkBox, 55.0f);
+    formData.print_IDs();
+    formData.checkABox(formData.fullName.checkBox);
+    formData.fullName.checkBox.animateCheckBox("name", formData.fullName.checkBox, 55.0f);
     std::cout << "\n";
-    return 0;
 }
-}
+
 /*
  copied UDT 2:
  */
@@ -245,7 +255,6 @@ void Meter::HorizontalMeter::Segment::fadeOut()
     }; 
     std::cout << "\n" << std::endl;
 }
-
 
 int main() 
 {
@@ -497,6 +506,23 @@ void StepSequencer::run(StepSequencer& s1 )
 /*
  new UDT 5:
  */
+ struct BuildNewForm
+ {
+     Form form;
+
+     BuildNewForm(int i)
+     {
+         form.isVisible = true;
+         form.fields = i;
+         form.mainForm(form);
+     }
+
+     ~BuildNewForm( )
+     {
+         form.isVisible = false;
+         std::cout << "\nForm vanished.\n";
+     }
+ };
 
 
 
@@ -508,12 +534,11 @@ void br()
 int main()
 {
     br();
-  //  FormTask::main();
+    BuildNewForm formWithFields(3);
     br();
-  //  MetersTask::main();
+    //  MetersTask::main();
     br();
     RandomSeq rs;
-
     br();
     std::cout << "good to go!" << std::endl;
 }
