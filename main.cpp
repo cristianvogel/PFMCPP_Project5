@@ -31,8 +31,8 @@ Project 5: Part 1 / 4
  copied UDT 1:
  */
 #include <iostream>
-#include <random>
-#include <ctime>
+#include <random>       //for random
+#include <ctime>        //for random seeding
 
 //namespace FormTask
 struct Form 
@@ -123,7 +123,7 @@ Form::TextField::TextField() :
 
 Form::~Form() 
 {
-std::cout << "\nForm with " << fields << " fields Destructing...\n";
+std::cout << "Form with " << fields << " fields Destructing...\n";
 }
 
 //Implementations 4
@@ -173,8 +173,6 @@ void Form::mainForm(Form& formData)
 /*
  copied UDT 2:
  */
-namespace MetersTask
-{ 
 struct Meter
 {
     Meter()
@@ -211,6 +209,7 @@ struct Meter
             {
                 segmentIndex = -1; activeStatus = false;
                 fadeOut();
+                std::cout << "\n";
             }
 
         };
@@ -219,6 +218,8 @@ struct Meter
 
         void updateSegment (int meterID, Segment s);
     };
+
+    void vuMeterMain(Meter& );
 
     HorizontalMeter vumeterType1 { 30, 20, 10, 150 };   
     HorizontalMeter vumeterType2 { 30, 40, 10, 150 }; 
@@ -242,6 +243,7 @@ void Meter::HorizontalMeter::Segment::draw (int , float )
 void Meter::HorizontalMeter::Segment::fadeOut()
 {
      //executes when removing an instance of a Segment UDT from memory 
+     
     float anim_time = 3.0f;
     float starts = opacity;
     float local_opacity = starts;
@@ -253,22 +255,19 @@ void Meter::HorizontalMeter::Segment::fadeOut()
         if (local_opacity/starts < 0.25f) unicode = "\u2591";          
         std::cout << unicode; //draw the animation
     }; 
-    std::cout << "\n" << std::endl;
 }
 
-int main() 
+void Meter::vuMeterMain(Meter & vu)
 {
-    Meter vu;
+   // Meter vu;
 
     std::cout << "Memory used by Meter -> " << sizeof(Meter) << " bytes\n"
     << "VuMeter1 x y w h ->  " << vu.vumeterType1.x << "," << vu.vumeterType1.y
     << "," << vu.vumeterType1.w <<  "," << vu.vumeterType1.h << "\n"
     << "VuMeter2 x y w h ->  " << vu.vumeterType2.x << "," << vu.vumeterType2.y
     << "," << vu.vumeterType2.w <<  "," << vu.vumeterType2.h 
-    << "\nDestructor fades out segments -> \n"; 
-    std::cout << "\n";
-    return 0;
-}
+    << "\nSegment destructor fades out graphics -> \n"; 
+    std::cout << "\n";   
 }
 
 /*
@@ -498,6 +497,7 @@ struct RandomSeq
 
     ~RandomSeq()
     {
+        std::cout << "\n Destructing Sequencer... \n";
         seq.saveWarning();
     }
 };
@@ -520,15 +520,39 @@ struct BuildNewForm
     ~BuildNewForm( )
     {
         form.isVisible = false;
-        std::cout << "\nForm vanished.\n";
+        std::cout << "\n\nDestructing Form.\n";
     }
 };
 
+struct VuMeters
+{
+    Meter vu;
 
+    VuMeters()
+    {
+        vu.vuMeterMain(vu);
+    }
+
+    ~VuMeters()
+    {
+         std::cout << "\n Destructing Meter Segments \n\n";
+    }
+};
+
+//made a little reusable ANSI console text colouring method
+//https://en.wikipedia.org/wiki/ANSI_escape_code
+std::string colour( int colour, std::string text ) 
+{       
+    std::string colourANSI = std::to_string( 30 + colour) ; //default red
+    std::string openANSI = "\x1B[" + colourANSI + "m";
+    std::string closeANSI = "\033[0m";
+    openANSI += text + closeANSI;
+    return ( (colour > 0) && (colour < 16) ) ? openANSI : "";
+}
 
 void br()
 {
-    std::cout <<  "\n~~~~~~~~~~~~~~~~~~~~~~~~~~\n"; 
+    std::cout <<  '\n' << colour(1, "~~~~~~~~~~~~~~~~~~~~~~~~~~") << '\n'; 
 }
 
 int main()
@@ -536,7 +560,7 @@ int main()
     br();
     BuildNewForm formWithFields(3);
     br();
-    //  MetersTask::main();
+    VuMeters vu;
     br();
     RandomSeq rs;
     br();
