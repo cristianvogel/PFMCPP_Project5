@@ -337,10 +337,11 @@ struct StepSequencer
     void doSomethingWithStepData();
     void saveWarning() 
     {
-        std::cout << "Press return to save sequencer.. ";
-        std::cin.get();
-        std::cout << "...saved! Quitting...";
+        std::cout << "\x1B[7mType 'Y' to save sequencer.. \033[0m" << std::endl;
+        int saveFlag {};
+        std::cin >> saveFlag;
         // saveToDisk function here
+        std::cout << "...saved! Quitting...";
     }
 
     StepSequencer();
