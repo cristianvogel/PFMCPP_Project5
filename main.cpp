@@ -247,7 +247,7 @@ void Meter::HorizontalMeter::Segment::fadeOut()
     float anim_time = 3.0f;
     float starts = opacity;
     float local_opacity = starts;
-    std::string unicode = "\u2593";
+    std::string unicode = "\x1B[33m\u2593";
     while (local_opacity > 0.1f) 
     {
         local_opacity -= (anim_time/60.0f);
@@ -255,6 +255,7 @@ void Meter::HorizontalMeter::Segment::fadeOut()
         if (local_opacity/starts < 0.25f) unicode = "\u2591";          
         std::cout << unicode; //draw the animation
     }; 
+    std::cout << "\033[0m"; //  ANSI Esc code reset
 }
 
 void Meter::vuMeterMain(Meter & vu)
@@ -307,7 +308,7 @@ struct StepSequencer
         StepData(); //Declaration of Constructor
         ~StepData() //Declaration ***AND*** Definition of Destructor
         {
-            std::cout << "\u2612";
+            std::cout << "\x1B[33m\u2612\033[0m";
         }
     };
 
@@ -350,7 +351,7 @@ StepSequencer::StepData::StepData() : //Definition of Constructor
                                 gateStatus ( true ),
                                 duration ( 1.0 )                            
 { 
-    std::cout << "\u2610";
+    std::cout << "\x1B[33m\u2610\033[0m";
 }
 
 StepSequencer::StepSequencer() :
@@ -465,10 +466,10 @@ void StepSequencer::run(StepSequencer& s1 )
     std::cout << "Memory used by Step Sequencer -> " << sizeof(StepSequencer) << " bytes \n"
     << "Stage Pitch Class -> " << s1.pitchClass << "\n"
     << "Sequencer type is -> " << (s1.isProbabilistic ? "probabilistic" : "normal")
-    << "\n\u2610 = Constructing \u2612 = Destructing\n\n"
-    << "Press Return to Play\n";
-    std::cin.get(); 
-
+    << "\n\x1B[33m\u2610 = Constructing \u2612 = Destructing\n"
+    << "\n\x1B[32mType [0] Normal [1] Probabilistic followed by \x1B[7mReturn to Play\n\033[0m";
+    std::cin >> s1.isProbabilistic; 
+    
     if (!s1.isProbabilistic)
     {
         std::cout << "\nStarting normal sequencer -> \n";
