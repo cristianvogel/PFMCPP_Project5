@@ -485,44 +485,44 @@ void StepSequencer::run(StepSequencer& s1 )
 /*
  new UDT 4:
  */
- struct RandomSeq
- {
-     StepSequencer seq;
+struct RandomSeq
+{
+    StepSequencer seq;
 
-     RandomSeq() 
-     {  
-         seq.isProbabilistic = false;
-         seq.isPlaying = false;
-         seq.run(seq);
-     } 
+    RandomSeq() 
+    {  
+        seq.isProbabilistic = false;
+        seq.isPlaying = false;
+        seq.run(seq);
+    } 
 
-     ~RandomSeq()
-     {
-         seq.saveWarning();
-     }
- };
+    ~RandomSeq()
+    {
+        seq.saveWarning();
+    }
+};
 
 
 /*
  new UDT 5:
  */
- struct BuildNewForm
- {
-     Form form;
+struct BuildNewForm
+{
+    Form form;
 
-     BuildNewForm(int i)
-     {
-         form.isVisible = true;
-         form.fields = i;
-         form.mainForm(form);
-     }
+    BuildNewForm(int i)
+    {
+        form.isVisible = true;
+        form.fields = i;
+        form.mainForm(form);
+    }
 
-     ~BuildNewForm( )
-     {
-         form.isVisible = false;
-         std::cout << "\nForm vanished.\n";
-     }
- };
+    ~BuildNewForm( )
+    {
+        form.isVisible = false;
+        std::cout << "\nForm vanished.\n";
+    }
+};
 
 
 
