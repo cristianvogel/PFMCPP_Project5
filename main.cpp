@@ -28,6 +28,8 @@ Create a branch named Part2
  example:
  */
 #include <iostream>
+#include <sstream> // for string stream
+
 namespace Example
 {
     struct MyFoo
@@ -55,8 +57,11 @@ namespace Example
 #include <ctime>        //for random seeding
 
 //namespace FormTask
+static int VISIBILITY = 0, CHARACTERISTIC = 1, STYLE = 2;
+
 struct Form 
 {
+    
     bool isVisible;
     std::string formID;
     int fields;
@@ -66,7 +71,7 @@ struct Form
         CheckBox()
         {
             size = 16.0f;
-            icon = "\u2593";           
+            icon = "\u25A3";           
         }
 
         CheckBox (float s) : size (s) {}
@@ -103,6 +108,22 @@ struct Form
     */
     TextField fullName;
 
+    std::string getStatus( int selector ) 
+    {
+        std::ostringstream status;
+        switch (selector)
+        {
+            case 0:
+                status << (this->isVisible ? "visible" : "hidden"); break;
+            case 1:
+                status << this->fields ; break;
+            case 2: 
+                status << this->getCBGlyph(); break;
+        }
+        return status.str();
+    }
+    
+    std::string getCBGlyph() { return this->fullName.checkBox.icon; }
     void mainForm(Form& );
     bool mouseOver (TextField fullName);
     void clearAllCheckBoxes (Form f);
@@ -186,7 +207,7 @@ void Form::mainForm(Form& formData)
     std::cout << "Memory used by Form -> " << sizeof(Form) << " bytes \n" ;
     formData.print_IDs();
     formData.checkABox(formData.fullName.checkBox);
-    formData.fullName.checkBox.animateCheckBox("name", formData.fullName.checkBox, 55.0f);
+    formData.fullName.checkBox.animateCheckBox("name", formData.fullName.checkBox, 70.0f);
     std::cout << "\n";
 }
 
@@ -206,12 +227,15 @@ struct Meter
     bool peakHold;
     char colourPallette;
     float slewRise, slewFall;
+    bool isVisible = {true};
 
     struct HorizontalMeter 
     {   
         int w,h,x,y;
+        std::string label {"HorizontalMeter"};
         float scaleFactor = {0.5f};
-        int numberOfSegments = {32};
+        int numberOfSegments =  {32};
+        
 
         struct Segment
         {
@@ -239,14 +263,31 @@ struct Meter
         void updateSegment (int meterID, Segment s);
     };
 
+    std::string getStatus( int selector ) 
+    {
+        std::ostringstream status;
+        switch (selector)
+        {
+            case 0:
+                status << (this->isVisible ? "visible" : "hidden"); break;
+            case 1:
+                status << this->vumeterType1.label; break;
+            case 2: 
+                status << this->segmentOpacity(); break;
+        }
+        return status.str();
+    }
+
     void vuMeterMain(Meter& );
 
-    HorizontalMeter vumeterType1 { 30, 20, 10, 150 };   
-    HorizontalMeter vumeterType2 { 30, 40, 10, 150 }; 
+    HorizontalMeter vumeterType1 { 30, 20, 10, 150, "H_Type1" };   
+    HorizontalMeter vumeterType2 { 30, 40, 10, 150, "H_Type2" }; 
+
+    float segmentOpacity() { return (this->vumeterType1.m_Segment.opacity); }
 };
 Meter::HorizontalMeter::Segment::Segment() :
                                         segmentIndex ( 0 ),
-                                        opacity ( 1.f ),
+                                        opacity ( 0.9f ),
                                         activeStatus ( true ),
                                         fadeFactor ( 0.001f )
 {}
@@ -274,6 +315,7 @@ void Meter::HorizontalMeter::Segment::fadeOut()
         if (local_opacity/starts < 0.75f) unicode = "\u2592";
         if (local_opacity/starts < 0.25f) unicode = "\u2591";          
         std::cout << unicode; //draw the animation
+        this->opacity=local_opacity;
     }; 
     std::cout << "\033[0m"; //  ANSI Esc code reset
 }
@@ -362,6 +404,26 @@ struct StepSequencer
         std::cin >> saveFlag;
         // saveToDisk function here
         std::cout << "...saved! Quitting...";
+    }
+
+    std::string getSeqTypeAsString() 
+    { 
+        return (this->isProbabilistic ? "probabilistic" : "normal"); 
+    }
+
+    std::string getStatus( int selector ) 
+    {
+        std::ostringstream status;
+        switch (selector)
+        {
+            case 0:
+                status << (this->isPlaying ? "playing" : "stopped"); break;
+            case 1:
+                status << this->numberOfSteps ; break;
+            case 2: 
+                status << this->getSeqTypeAsString(); break;
+        }
+        return status.str();
     }
 
     StepSequencer();
@@ -461,7 +523,7 @@ void StepSequencer::playEitherWay(StepSequencer& seq)
     std::string playSign = "";
 
     //play 48 steps of an either-way probabilistic sequencer
-    for (int i=48; i>1; --i) 
+    for (int i=48; i>-1; --i) 
     {
         playSign = " \u21E8 ";
         randomInt = static_cast<int>(std::rand()%10);
@@ -473,6 +535,7 @@ void StepSequencer::playEitherWay(StepSequencer& seq)
         }
         std::cout << playSign << " " << seq.currentStage << " ";
         seq.currentStage = seq.step( );
+        if (i==0) seq.isPlaying = false;
     }
 }
 
@@ -581,11 +644,42 @@ int main()
 {
 	Example::main();
     br();
-    BuildNewForm formWithFields(3);
+
+    BuildNewForm formWithFields(5);
+
+    std::cout 
+    << "Form with field count of " 
+    << formWithFields.form.getStatus( CHARACTERISTIC ) 
+    << " and check-box style "
+    << formWithFields.form.getStatus( STYLE )
+    << " is " 
+    << colour(3,formWithFields.form.getStatus( VISIBILITY )) 
+    << '\n';
     br();
-    VuMeters vu;
+
+    VuMeters meters;
+
+    std::cout 
+    << "Meter labelled  " 
+    << meters.vu.getStatus( CHARACTERISTIC ) 
+    << " and segment alpha "
+    << meters.vu.getStatus( STYLE )
+    << " is " 
+    << colour(3,meters.vu.getStatus( VISIBILITY )) 
+    << '\n';
     br();
+   
     RandomSeq rs;
+
+    std::cout 
+    << "\nSequencer style " 
+    << rs.seq.getStatus( STYLE ) 
+    << " with step count "
+    << rs.seq.getStatus( CHARACTERISTIC )
+    << " is " 
+    << colour(3,rs.seq.getStatus( VISIBILITY )) 
+    << '\n';
     br();
+
     std::cout << "good to go!" << std::endl;
 }
