@@ -164,7 +164,7 @@ Form::TextField::TextField() :
 
 Form::~Form() 
 {
-std::cout << "Form with " << fields << " fields Destructing...\n";
+    std::cout << "Form with " << fields << " fields Destructing...\n";
 }
 
 //Implementations 4
