@@ -1,57 +1,36 @@
 /*
-Project 5: Part 2 / 4
- video: Chapter 3 Part 1
+ Project 5: Part 3 / 4
+ video: Chapter 3 Part 4: 
 
-Create a branch named Part2
+Create a branch named Part3
 
- The 'this' keyword
+ the 'new' keyword
+
+ 1) add #include "LeakedObjectDetector.h" to main
  
- 1) For any std::cout statements you had in main() that accessed member variables of your types or printed out the results of your member function calls,
-        a) write a member function that prints the same thing out, but uses the proper techniques inside the member functions to access the same member variables/functions.
-        b) be explicit with your use of 'this->' in those member functions so we see how you're accessing/calling those member variables and functions *inside*
+ 3) Add 'JUCE_LEAK_DETECTOR(OwnerClass)' at the end of your UDTs.
  
- 2) if you didn't have any std::cout statements in main() that accessed member variables:
-         write some.
-         then do 1a) & 1b)
+ 4) write the name of your class where it says "OwnerClass"
  
+ 5) write wrapper classes for each type similar to how it was shown in the video
  
- 3) After you finish, click the [run] button.  Clear up any errors or warnings as best you can.
+ 7) update main to use your wrapper classes, which have your UDTs as pointer member variables.
+ 
+ 8) After you finish, click the [run] button.  Clear up any errors or warnings as best you can.
  
  Commit your changes by clicking on the Source Control panel on the left, entering a message, and click [Commit and push].
  
  Send me the the link to your repl.it in a DM on Slack
 
  Wait for my code review.
+ 
+ see here for an example: https://repl.it/@matkatmusic/ch3p04example
  */
-
-/*
- example:
- */
-#include <iostream>
-#include <sstream> // for string stream
-
-namespace Example
-{
-    struct MyFoo
-    {
-        MyFoo() { std::cout << "creating MyFoo" << std::endl; }
-        ~MyFoo() { std::cout << "destroying MyFoo" << std::endl; }
-        void memberFunc() { std::cout << "MyFoo returnValue(): " << this->returnValue() << " and MyFoo memberVariable: " << this->memberVariable << std::endl; }  //3)
-        int returnValue() { return 3; }
-        float memberVariable = 3.14f;
-    };
-    int main()
-    {
-        MyFoo mf;
-        std::cout << "mf returnValue(): " << mf.returnValue() << " and mf memberVariable: " << mf.memberVariable << std::endl;  //3)
-        mf.memberFunc();
-        return 0;
-    }
-}
 
 /*
  copied UDT 1:
  */
+#include <sstream> // for string stream
 #include <iostream>
 #include <random>       //for random
 #include <ctime>        //for random seeding
@@ -642,7 +621,6 @@ void br()
 
 int main()
 {
-	Example::main();
     br();
 
     BuildNewForm formWithFields(5);
