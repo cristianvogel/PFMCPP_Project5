@@ -34,6 +34,7 @@ Create a branch named Part3
 #include <iostream>
 #include <random>       //for random
 #include <ctime>        //for random seeding
+#include "LeakedObjectDetector.h"
 
 //namespace FormTask
 static int VISIBILITY = 0, CHARACTERISTIC = 1, STYLE = 2;
@@ -120,7 +121,12 @@ struct Form
     Form(int );
 
     ~Form();
+
+    JUCE_LEAK_DETECTOR(Form)
 };
+
+
+
 Form::Form() :
             isVisible ( true ),
             formID ( "UserName" ),
@@ -634,7 +640,7 @@ int main()
     << colour(3,formWithFields.form.getStatus( VISIBILITY )) 
     << '\n';
     br();
-
+/**
     VuMeters meters;
 
     std::cout 
@@ -658,6 +664,6 @@ int main()
     << colour(3,rs.seq.getStatus( VISIBILITY )) 
     << '\n';
     br();
-
+**/
     std::cout << "good to go!" << std::endl;
 }
