@@ -34,6 +34,7 @@ Create a branch named Part3
 #include <iostream>
 #include <random>       //for random
 #include <ctime>        //for random seeding
+#include "LeakedObjectDetector.h"
 
 //namespace FormTask
 static int VISIBILITY = 0, CHARACTERISTIC = 1, STYLE = 2;
@@ -120,7 +121,10 @@ struct Form
     Form(int );
 
     ~Form();
+
+   JUCE_LEAK_DETECTOR(Form)
 };
+
 Form::Form() :
             isVisible ( true ),
             formID ( "UserName" ),
@@ -189,6 +193,7 @@ void Form::mainForm(Form& formData)
     formData.fullName.checkBox.animateCheckBox("name", formData.fullName.checkBox, 70.0f);
     std::cout << "\n";
 }
+
 
 /*
  copied UDT 2:
@@ -310,13 +315,12 @@ void Meter::vuMeterMain(Meter & vu)
     << "," << vu.vumeterType2.w <<  "," << vu.vumeterType2.h 
     << "\nSegment destructor fades out graphics -> \n"; 
     std::cout << "\n";   
-}
+} 
 
 /*
  copied UDT 3:
  */
-//namespace SequencerTask
- 
+//namespace SequencerTask 
 struct StepSequencer
 {
     struct StepData
@@ -551,7 +555,6 @@ void StepSequencer::run(StepSequencer& s1 )
 struct RandomSeq
 {
     StepSequencer seq;
-
     RandomSeq() 
     {  
         seq.isProbabilistic = false;
@@ -564,8 +567,22 @@ struct RandomSeq
         std::cout << "\n Destructing Sequencer... \n";
         seq.saveWarning();
     }
+
+    JUCE_LEAK_DETECTOR(RandomSeq)
 };
 
+//wrapper class - constructs and destructs through pointer semantics
+struct RandomSeqWrapper
+{
+    RandomSeqWrapper ( RandomSeq* ptr ) : pointerToRndSeq( ptr ) { }
+
+    ~RandomSeqWrapper () 
+    {
+        delete pointerToRndSeq;
+    }
+
+    RandomSeq* pointerToRndSeq = nullptr;
+};
 
 /*
  new UDT 5:
@@ -573,7 +590,6 @@ struct RandomSeq
 struct BuildNewForm
 {
     Form form;
-
     BuildNewForm(int i)
     {
         form.isVisible = true;
@@ -586,7 +602,23 @@ struct BuildNewForm
         form.isVisible = false;
         std::cout << "\n\nDestructing Form.\n";
     }
+
+    JUCE_LEAK_DETECTOR(BuildNewForm)
 };
+
+//wrapper class - constructs and destructs through pointer semantics
+struct BuildNewFormWrapper
+{
+    BuildNewFormWrapper ( BuildNewForm* ptr ) : pointerToBuildNewForm( ptr ) { }
+
+    ~BuildNewFormWrapper () 
+    {
+        delete pointerToBuildNewForm;
+    }
+
+    BuildNewForm* pointerToBuildNewForm = nullptr;
+};
+
 
 struct VuMeters
 {
@@ -601,6 +633,21 @@ struct VuMeters
     {
          std::cout << "\n Destructing Meter Segments \n\n";
     }
+
+    JUCE_LEAK_DETECTOR(VuMeters)
+};
+
+//wrapper class - constructs and destructs through pointer semantics
+struct VuMetersWrapper
+{
+    VuMetersWrapper ( VuMeters* ptr ) : pointerToVuMeters( ptr ) { }
+
+    ~VuMetersWrapper () 
+    {
+        delete pointerToVuMeters;
+    }
+
+    VuMeters* pointerToVuMeters = nullptr;
 };
 
 //made a little reusable ANSI console text colouring method
@@ -623,39 +670,40 @@ int main()
 {
     br();
 
-    BuildNewForm formWithFields(5);
+   // BuildNewForm formWithFields(5);
+    BuildNewFormWrapper formWithFields ( new BuildNewForm(5) );
 
     std::cout 
     << "Form with field count of " 
-    << formWithFields.form.getStatus( CHARACTERISTIC ) 
+    << formWithFields.pointerToBuildNewForm->form.getStatus( CHARACTERISTIC ) 
     << " and check-box style "
-    << formWithFields.form.getStatus( STYLE )
+    << formWithFields.pointerToBuildNewForm->form.getStatus( STYLE )
     << " is " 
-    << colour(3,formWithFields.form.getStatus( VISIBILITY )) 
+    << colour(3,formWithFields.pointerToBuildNewForm->form.getStatus( VISIBILITY )) 
     << '\n';
     br();
 
-    VuMeters meters;
+    VuMetersWrapper meters (new VuMeters() );
 
     std::cout 
     << "Meter labelled  " 
-    << meters.vu.getStatus( CHARACTERISTIC ) 
+    << meters.pointerToVuMeters->vu.getStatus( CHARACTERISTIC ) 
     << " and segment alpha "
-    << meters.vu.getStatus( STYLE )
+    << meters.pointerToVuMeters->vu.getStatus( STYLE )
     << " is " 
-    << colour(3,meters.vu.getStatus( VISIBILITY )) 
+    << colour(3,meters.pointerToVuMeters->vu.getStatus( VISIBILITY )) 
     << '\n';
     br();
-   
-    RandomSeq rs;
+  
+    RandomSeqWrapper rs (new RandomSeq() );
 
     std::cout 
     << "\nSequencer style " 
-    << rs.seq.getStatus( STYLE ) 
+    << rs.pointerToRndSeq->seq.getStatus( STYLE ) 
     << " with step count "
-    << rs.seq.getStatus( CHARACTERISTIC )
+    << rs.pointerToRndSeq->seq.getStatus( CHARACTERISTIC )
     << " is " 
-    << colour(3,rs.seq.getStatus( VISIBILITY )) 
+    << colour(3,rs.pointerToRndSeq->seq.getStatus( VISIBILITY )) 
     << '\n';
     br();
 
