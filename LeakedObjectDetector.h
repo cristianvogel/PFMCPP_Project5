@@ -1,4 +1,5 @@
 #include "Atomic.h"
+#include <cassert>
 
 namespace juce
 {
