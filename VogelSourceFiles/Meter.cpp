@@ -1,13 +1,7 @@
 #include <iostream>
 #include "../VogelHeaderFiles/Meter.h"
 
-Meter::HorizontalMeter::Segment::Segment() :
-                                        segmentIndex ( 0 ),
-                                        opacity ( 0.9f ),
-                                        activeStatus ( true ),
-                                        fadeFactor ( 0.001f )
-{}
-//Implementation 9
+//Implementations
 void Meter::HorizontalMeter::updateSegment (int, Meter::HorizontalMeter::Segment)
 {
     //update segment graphics style

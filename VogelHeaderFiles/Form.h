@@ -1,11 +1,9 @@
 #pragma once
-// or 
-// #ifndef Form_H
-// #define Form_H
+
+#include <sstream> // for string stream 'ostream'
 
 struct Form 
-{
-    
+{ 
     bool isVisible;
     std::string formID;
     int fields;
@@ -86,7 +84,7 @@ struct Form
 
     ~Form();
 
-   JUCE_LEAK_DETECTOR(Form)
+   //JUCE_LEAK_DETECTOR(Form)
 };
 
 Form::Form() :
@@ -114,5 +112,4 @@ Form::~Form()
     std::cout << "Form with " << fields << " fields Destructing...\n";
 }
 
-// #endif
 

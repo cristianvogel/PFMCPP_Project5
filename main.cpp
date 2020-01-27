@@ -36,137 +36,23 @@
          just split it up into source files and provide the appropriate #include directives.
  */
 
-#include <sstream> // for string stream
 #include <iostream>
-#include <random>       //for random
-#include <ctime>        //for random seeding
 
 #include "LeakedObjectDetector.h"
+#include "VogelUtils/ConsoleFormatting.h"
 
 #include "VogelHeaderFiles/StaticVariables.h"
 #include "VogelHeaderFiles/Form.h"
 #include "VogelHeaderFiles/Meter.h"
+#include "VogelHeaderFiles/StepSequencer.h"
 
+#include "VogelWrapperFiles/WrapperFiles.h"
 
-struct RandomSeq
-{
-    StepSequencer seq;
-    RandomSeq() 
-    {  
-        seq.isProbabilistic = false;
-        seq.isPlaying = false;
-        seq.run(seq);
-    } 
-
-    ~RandomSeq()
-    {
-        std::cout << "\n Destructing Sequencer... \n";
-        seq.saveWarning();
-    }
-
-    JUCE_LEAK_DETECTOR(RandomSeq)
-};
-
-//wrapper class - constructs and destructs through pointer semantics
-struct RandomSeqWrapper
-{
-    RandomSeqWrapper ( RandomSeq* ptr ) : pointerToRndSeq( ptr ) { }
-
-    ~RandomSeqWrapper () 
-    {
-        delete pointerToRndSeq;
-    }
-
-    RandomSeq* pointerToRndSeq = nullptr;
-};
-
-/*
- new UDT 5:
- */
-struct BuildNewForm
-{
-    Form form;
-    BuildNewForm(int i)
-    {
-        form.isVisible = true;
-        form.fields = i;
-        form.mainForm(form);
-    }
-
-    ~BuildNewForm( )
-    {
-        form.isVisible = false;
-        std::cout << "\n\nDestructing Form.\n";
-    }
-
-    JUCE_LEAK_DETECTOR(BuildNewForm)
-};
-
-//wrapper class - constructs and destructs through pointer semantics
-struct BuildNewFormWrapper
-{
-    BuildNewFormWrapper ( BuildNewForm* ptr ) : pointerToBuildNewForm( ptr ) { }
-
-    ~BuildNewFormWrapper () 
-    {
-        delete pointerToBuildNewForm;
-    }
-
-    BuildNewForm* pointerToBuildNewForm = nullptr;
-};
-
-
-struct VuMeters
-{
-    Meter vu;
-
-    VuMeters()
-    {
-        vu.vuMeterMain(vu);
-    }
-
-    ~VuMeters()
-    {
-         std::cout << "\n Destructing Meter Segments \n\n";
-    }
-
-    JUCE_LEAK_DETECTOR(VuMeters)
-};
-
-//wrapper class - constructs and destructs through pointer semantics
-struct VuMetersWrapper
-{
-    VuMetersWrapper ( VuMeters* ptr ) : pointerToVuMeters( ptr ) { }
-
-    ~VuMetersWrapper () 
-    {
-        delete pointerToVuMeters;
-    }
-
-    VuMeters* pointerToVuMeters = nullptr;
-};
-
-//made a little reusable ANSI console text colouring method
-//https://en.wikipedia.org/wiki/ANSI_escape_code
-std::string colour( int colour, std::string text ) 
-{       
-    std::string colourANSI = std::to_string( 30 + colour) ; //default red
-    std::string openANSI = "\x1B[" + colourANSI + "m";
-    std::string closeANSI = "\033[0m";
-    openANSI += text + closeANSI;
-    return ( (colour > 0) && (colour < 16) ) ? openANSI : "";
-}
-
-void br()
-{
-    std::cout <<  '\n' << colour(1, "~~~~~~~~~~~~~~~~~~~~~~~~~~") << '\n'; 
-}
 
 int main()
 {
     br();
 
-   // BuildNewForm formWithFields(5);
     BuildNewFormWrapper formWithFields ( new BuildNewForm(5) );
 
     std::cout 

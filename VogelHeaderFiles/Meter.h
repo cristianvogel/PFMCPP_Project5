@@ -3,6 +3,8 @@
 // #ifndef Meter_H
 // #define Meter_H
 
+#include <sstream> // for string stream 'ostream'
+
 struct Meter
 {
     Meter()
@@ -74,5 +76,13 @@ struct Meter
 
     float segmentOpacity() { return (this->vumeterType1.m_Segment.opacity); }
 };
+
+//Constructor
+Meter::HorizontalMeter::Segment::Segment() :
+                                        segmentIndex ( 0 ),
+                                        opacity ( 0.9f ),
+                                        activeStatus ( true ),
+                                        fadeFactor ( 0.001f )
+{}
 
 // #endif

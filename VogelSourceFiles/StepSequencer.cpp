@@ -1,24 +1,8 @@
 #include <iostream>
+
 #include "../VogelHeaderFiles/StepSequencer.h"
 
-
-StepSequencer::StepData::StepData() : //Definition of Constructor
-                                currentStage ( 0 ),
-                                gateStatus ( true ),
-                                duration ( 1.0 )                            
-{ 
-    std::cout << "\x1B[33m\u2610\033[0m";
-}
-
-StepSequencer::StepSequencer() :
-                                isPlaying ( false ),
-                                numberOfSteps ( 8 ),
-                                tempo ( 120 ),
-                                id ( 1 ),   
-                                isBackwards ( false )
-{ std::cout << "Sequencer defined..."; }
-
-//Implementations 10
+//Implementations 
 int StepSequencer::step() 
 {
     int localStepSize;
@@ -138,3 +122,4 @@ void StepSequencer::run(StepSequencer& s1 )
         s1.playEitherWay(s1);
     }
 }
+

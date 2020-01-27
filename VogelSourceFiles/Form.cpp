@@ -1,7 +1,8 @@
-//Form Implementations
 #include <iostream>
 #include "../VogelHeaderFiles/Form.h"
 
+
+//implementations...
 bool Form::mouseOver (TextField) 
 {
     //return true when mouse is over a certain field
@@ -44,3 +45,4 @@ void Form::mainForm(Form& formData)
     formData.fullName.checkBox.animateCheckBox("name", formData.fullName.checkBox, 70.0f);
     std::cout << "\n";
 }
+
