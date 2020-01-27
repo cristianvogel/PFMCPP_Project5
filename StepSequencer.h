@@ -13,7 +13,7 @@ struct StepSequencer
         **/
         struct PitchClass 
         {
-            PitchClass()
+            PitchClass() THIS IS AN IMPLEMENTATION
             {
                 frequency = 440;
                //TODO: pitch = pitchFromFreq (frequency);
@@ -34,7 +34,7 @@ struct StepSequencer
         double duration = 1.0;
 
         StepData(); //Declaration of Constructor
-        ~StepData() //Declaration ***AND*** Definition of Destructor
+        ~StepData() THIS IS AN IMPLEMENTATION
         {
             std::cout << "\x1B[33m\u2612\033[0m";
         }
@@ -60,7 +60,7 @@ struct StepSequencer
     void doSomethingWithStepData();
 
     //TO-DO: In-Class definitions need to get moved out for this task...
-    void saveWarning() 
+    void saveWarning()  THIS IS AN IMPLEMENTATION
     {
         std::cout << "\x1B[7mType 'Y' to save sequencer.. \033[0m" << std::endl;
         int saveFlag {};
@@ -69,12 +69,12 @@ struct StepSequencer
         std::cout << "...saved! Quitting...";
     }
 
-    std::string getSeqTypeAsString() 
+    std::string getSeqTypeAsString()  THIS IS AN IMPLEMENTATION
     { 
         return (this->isProbabilistic ? "probabilistic" : "normal"); 
     }
 
-    std::string getStatus( int selector ) 
+    std::string getStatus( int selector ) THIS IS AN IMPLEMENTATION
     {
         std::ostringstream status; //implicitly defined error??
         switch (selector)
@@ -93,7 +93,7 @@ struct StepSequencer
 };
 
 //Constructors
-StepSequencer::StepData::StepData() : //Definition of Constructor
+StepSequencer::StepData::StepData() : THIS IS AN IMPLEMENTATION
                                 currentStage ( 0 ),
                                 gateStatus ( true ),
                                 duration ( 1.0 )                            
@@ -101,7 +101,7 @@ StepSequencer::StepData::StepData() : //Definition of Constructor
     std::cout << "\x1B[33m\u2610\033[0m";
 }
 
-StepSequencer::StepSequencer() :
+StepSequencer::StepSequencer() : THIS IS AN IMPLEMENTATION
                                 isPlaying ( false ),
                                 numberOfSteps ( 8 ),
                                 tempo ( 120 ),

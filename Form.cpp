@@ -1,7 +1,6 @@
 #include <iostream>
-//#include "../VogelWrapperFiles/WrapperClasses.h"
+#include "Form.h"
 
-#include "../VogelHeaderFiles/Form.h"
 
 //implementations...
 bool Form::mouseOver (TextField) 

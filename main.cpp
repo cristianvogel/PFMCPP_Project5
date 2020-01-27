@@ -39,10 +39,9 @@
 #include <iostream>
 #include <sstream> // for string stream 'ostream'
 
-#include "VogelUtils/ConsoleFormatting.h"
-
-#include "VogelHeaderFiles/StaticVariables.h"
-#include "VogelWrapperFiles/WrapperClasses.h"
+#include "ConsoleFormatting.h"
+#include "StaticVariables.h"
+#include "WrapperClasses.h"
 
 
 //do I need forward type declarations???
@@ -66,29 +65,29 @@ int main()
     << '\n';
     br();
 
-    VuMetersWrapper meters (new VuMeters() );
+    // VuMetersWrapper meters (new VuMeters() );
 
-    std::cout 
-    << "Meter labelled  " 
-    << meters.pointerToVuMeters->vu.getStatus( CHARACTERISTIC ) 
-    << " and segment alpha "
-    << meters.pointerToVuMeters->vu.getStatus( STYLE )
-    << " is " 
-    << colour(3,meters.pointerToVuMeters->vu.getStatus( VISIBILITY )) 
-    << '\n';
-    br();
+    // std::cout 
+    // << "Meter labelled  " 
+    // << meters.pointerToVuMeters->vu.getStatus( CHARACTERISTIC ) 
+    // << " and segment alpha "
+    // << meters.pointerToVuMeters->vu.getStatus( STYLE )
+    // << " is " 
+    // << colour(3,meters.pointerToVuMeters->vu.getStatus( VISIBILITY )) 
+    // << '\n';
+    // br();
   
-    RandomSeqWrapper rs (new RandomSeq() );
+    // RandomSeqWrapper rs (new RandomSeq() );
 
-    std::cout 
-    << "\nSequencer style " 
-    << rs.pointerToRndSeq->seq.getStatus( STYLE ) 
-    << " with step count "
-    << rs.pointerToRndSeq->seq.getStatus( CHARACTERISTIC )
-    << " is " 
-    << colour(3,rs.pointerToRndSeq->seq.getStatus( VISIBILITY )) 
-    << '\n';
-    br();
+    // std::cout 
+    // << "\nSequencer style " 
+    // << rs.pointerToRndSeq->seq.getStatus( STYLE ) 
+    // << " with step count "
+    // << rs.pointerToRndSeq->seq.getStatus( CHARACTERISTIC )
+    // << " is " 
+    // << colour(3,rs.pointerToRndSeq->seq.getStatus( VISIBILITY )) 
+    // << '\n';
+    // br();
 
-    std::cout << "good to go!" << std::endl;
+    // std::cout << "good to go!" << std::endl;
 }

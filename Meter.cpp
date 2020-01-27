@@ -1,5 +1,5 @@
 #include <iostream>
-#include "../VogelWrapperFiles/WrapperClasses.h"
+#include "WrapperClasses.h"
 
 //Implementations
 void Meter::HorizontalMeter::updateSegment (int, Meter::HorizontalMeter::Segment)

@@ -10,15 +10,15 @@ struct Form
     
     struct CheckBox
     {
-        CheckBox()
-        {
-            size = 16.0f;
-            icon = "\u25A3";           
-        }
+        CheckBox()          HERE
+        {                   HERE
+            size = 16.0f;   HERE
+            icon = "\u25A3"; HERE       
+        }                   HERE
 
-        CheckBox (float s) : size (s) {}
+        CheckBox (float s) : size (s) {} THIS IS AN IMPLEMENTATION
 
-        ~CheckBox()
+        ~CheckBox() THIS IS AN IMPLEMENTATION
         {
           std::cout << "Destructing check box with icon " << icon << "\n";
         }
@@ -50,7 +50,7 @@ struct Form
     */
     TextField fullName;
 
-    std::string getStatus( int selector ) 
+    std::string getStatus( int selector )  THIS IS AN IMPLEMENTATION
     {
         std::ostringstream status;
         switch (selector)
@@ -65,16 +65,16 @@ struct Form
         return status.str();
     }
     
-    std::string getCBGlyph() { return this->fullName.checkBox.icon; }
+    std::string getCBGlyph() { return this->fullName.checkBox.icon; } THIS IS AN IMPLEMENTATION
     void mainForm(Form& );
     bool mouseOver (TextField fullName);
     void clearAllCheckBoxes (Form f);
-    void checkABox (CheckBox& )
+    void checkABox (CheckBox& ) THIS IS AN IMPLEMENTATION
     {
         std::cout << this->fullName.checkBox.icon << " -> \u2713 \n";
         this->fullName.checkBox.isChecked = true;
     }
-    void print_IDs()
+    void print_IDs() THIS IS AN IMPLEMENTATION
     {
          std::cout << "FieldID ->  " << fullName.fieldID << "\nFormID ->  " << formID << "\nCheckBox icon ->  " << fullName.checkBox.icon << '\n';
     }
@@ -86,27 +86,27 @@ struct Form
 
 };
 
-Form::Form() :
+Form::Form() : THIS IS AN IMPLEMENTATION
             isVisible ( true ),
             formID ( "UserName" ),
             fields ( 2 ),
             fullName ( TextField() ) 
 { } 
 
-Form::Form(int nbrFields) :
+Form::Form(int nbrFields) : THIS IS AN IMPLEMENTATION
             isVisible ( true ),
             formID ( "Fields" ),
             fields ( nbrFields ),
             fullName (  ) 
 { } 
 
-Form::TextField::TextField() : 
+Form::TextField::TextField() :  THIS IS AN IMPLEMENTATION
                             x ( 80 ), y ( 160 ), w ( 400 ), h ( 90 ),
                             alpha ( 32 ),
                             fieldID ( "FullName" )
 { }
 
-Form::~Form() 
+Form::~Form()  THIS IS AN IMPLEMENTATION
 {
     std::cout << "Form with " << fields << " fields Destructing...\n";
 }

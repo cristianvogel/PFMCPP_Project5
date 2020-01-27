@@ -2,7 +2,7 @@
 #include <ctime>        //for random seeding
 #include <random>       //for random
 
-#include "../VogelWrapperFiles/WrapperClasses.h"
+#include "WrapperClasses.h"
 
 //Implementations 
 int StepSequencer::step() 

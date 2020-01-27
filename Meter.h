@@ -7,7 +7,7 @@
 
 struct Meter
 {
-    Meter()
+    Meter() THIS IS AN IMPLEMENTATION
     {
         meterID = 1; peakHold = true;
         colourPallette = 'a';
@@ -40,7 +40,7 @@ struct Meter
                        
             Segment(); 
 
-            ~Segment()
+            ~Segment() THIS IS AN IMPLEMENTATION
             {
                 segmentIndex = -1; activeStatus = false;
                 fadeOut();
@@ -49,13 +49,13 @@ struct Meter
 
         };
 
-        Segment m_Segment { } ; // Segment of 
+        Segment m_Segment { };
 
         void updateSegment (int meterID, Segment s);
     };
 
     //TO-DO: In-Class definitions need to get moved out for this task...
-    std::string getStatus( int selector ) 
+    std::string getStatus( int selector )  THIS IS AN IMPLEMENTATION
     {
         std::ostringstream status;
         switch (selector)
@@ -80,7 +80,7 @@ struct Meter
 };
 
 //Constructor
-Meter::HorizontalMeter::Segment::Segment() :
+Meter::HorizontalMeter::Segment::Segment() : THIS IS AN IMPLEMENTATION
                                         segmentIndex ( 0 ),
                                         opacity ( 0.9f ),
                                         activeStatus ( true ),
