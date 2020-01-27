@@ -1,17 +1,17 @@
 #pragma once
 
-#include <ctime>        //for random seeding
-#include <random>       //for random
-#include <sstream> // for string stream 'ostream'
+#include <sstream> // for string stream
 
 struct StepSequencer
 {
     struct StepData
     {
+        /** 
+        I don't think PitchClass should be a nested nested struct anymore
+        makes things difficult without proper member access privelages
+        but leaving as is for now....
+        **/
         struct PitchClass 
-        // I don't think PitchClass should be a nested nested struct anymore
-        // makes things difficult without proper member access privelages
-        // but leaving as is for now....
         {
             PitchClass()
             {
@@ -24,7 +24,7 @@ struct StepSequencer
             
             char pitchFromFreq (double);
         };
-
+        
         int currentStage = { 1 };
 
         PitchClass stepPitchClass;
@@ -42,17 +42,12 @@ struct StepSequencer
 
     int getCurrentStage (unsigned int id);
     
-    //StepData stepData;
     StepData interpretStageData (int );
 
     bool isPlaying;
     int numberOfSteps;
     double tempo;
     unsigned int id;
-    /**
-    char pitchClass { stepData.pitchClass }; 
-    int currentStage { stepData.currentStage };
-    **/
     char pitchClass { 'A' }; 
     int currentStage { 0 };
     bool isBackwards, isProbabilistic ;
@@ -63,6 +58,8 @@ struct StepSequencer
     void run (StepSequencer&);
     void play (StepSequencer&);
     void doSomethingWithStepData();
+
+    //TO-DO: In-Class definitions need to get moved out for this task...
     void saveWarning() 
     {
         std::cout << "\x1B[7mType 'Y' to save sequencer.. \033[0m" << std::endl;
@@ -79,7 +76,7 @@ struct StepSequencer
 
     std::string getStatus( int selector ) 
     {
-        std::ostringstream status;
+        std::ostringstream status; //implicitly defined error??
         switch (selector)
         {
             case 0:

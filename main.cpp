@@ -37,17 +37,18 @@
  */
 
 #include <iostream>
+#include <sstream> // for string stream 'ostream'
 
-#include "LeakedObjectDetector.h"
 #include "VogelUtils/ConsoleFormatting.h"
 
 #include "VogelHeaderFiles/StaticVariables.h"
-#include "VogelHeaderFiles/Form.h"
-#include "VogelHeaderFiles/Meter.h"
-#include "VogelHeaderFiles/StepSequencer.h"
+#include "VogelWrapperFiles/WrapperClasses.h"
 
-#include "VogelWrapperFiles/WrapperFiles.h"
 
+//do I need forward type declarations???
+//struct Form;
+//struct StepSequencer;
+//struct Meter;
 
 int main()
 {

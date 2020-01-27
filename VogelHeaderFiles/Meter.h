@@ -3,7 +3,7 @@
 // #ifndef Meter_H
 // #define Meter_H
 
-#include <sstream> // for string stream 'ostream'
+#include <sstream> // for string stream
 
 struct Meter
 {
@@ -54,6 +54,7 @@ struct Meter
         void updateSegment (int meterID, Segment s);
     };
 
+    //TO-DO: In-Class definitions need to get moved out for this task...
     std::string getStatus( int selector ) 
     {
         std::ostringstream status;
@@ -74,6 +75,7 @@ struct Meter
     HorizontalMeter vumeterType1 { 30, 20, 10, 150, "H_Type1" };   
     HorizontalMeter vumeterType2 { 30, 40, 10, 150, "H_Type2" }; 
 
+     //TO-DO: In-Class definitions need to get moved out for this task...
     float segmentOpacity() { return (this->vumeterType1.m_Segment.opacity); }
 };
 

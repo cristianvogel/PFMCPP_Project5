@@ -1,6 +1,6 @@
 #pragma once
 
-#include <sstream> // for string stream 'ostream'
+#include <sstream> // for string stream
 
 struct Form 
 { 
@@ -84,7 +84,6 @@ struct Form
 
     ~Form();
 
-   //JUCE_LEAK_DETECTOR(Form)
 };
 
 Form::Form() :

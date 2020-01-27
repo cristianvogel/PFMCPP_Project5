@@ -1,6 +1,8 @@
 #include <iostream>
+#include <ctime>        //for random seeding
+#include <random>       //for random
 
-#include "../VogelHeaderFiles/StepSequencer.h"
+#include "../VogelWrapperFiles/WrapperClasses.h"
 
 //Implementations 
 int StepSequencer::step() 
