@@ -11,18 +11,8 @@
 struct RandomSeq
 {
     StepSequencer seq;
-    RandomSeq() THIS IS AN IMPLEMENTATION
-    {  
-        seq.isProbabilistic = false;
-        seq.isPlaying = false;
-        seq.run(seq);
-    } 
-
-    ~RandomSeq() THIS IS AN IMPLEMENTATION
-    {
-        std::cout << "\n Destructing Sequencer... \n";
-        seq.saveWarning();
-    }
+    RandomSeq();
+    ~RandomSeq();
 
     JUCE_LEAK_DETECTOR(RandomSeq)
 };
@@ -30,19 +20,10 @@ struct RandomSeq
 struct BuildNewForm
 {
     Form form;
-    BuildNewForm(int i) THIS IS AN IMPLEMENTATION
-    {
-        form.isVisible = true;
-        form.fields = i;
-        form.mainForm(form);
-    }
 
-    ~BuildNewForm( ) THIS IS AN IMPLEMENTATION
-    {
-        form.isVisible = false;
-        std::cout << "\n\nDestructing Form.\n";
-    }
-
+    BuildNewForm(int i);
+    ~BuildNewForm();
+    
     JUCE_LEAK_DETECTOR(BuildNewForm)
 };
 
@@ -50,15 +31,8 @@ struct VuMeters
 {
     Meter vu;
 
-    VuMeters() THIS IS AN IMPLEMENTATION
-    {
-        vu.vuMeterMain(vu);
-    }
-
-    ~VuMeters() THIS IS AN IMPLEMENTATION
-    {
-         std::cout << "\n Destructing Meter Segments \n\n";
-    }
+    VuMeters();
+    ~VuMeters();
 
     JUCE_LEAK_DETECTOR(VuMeters)
 };
@@ -66,9 +40,10 @@ struct VuMeters
 //wrapper class - constructs and destructs through pointer semantics
 struct RandomSeqWrapper
 {
-    RandomSeqWrapper ( RandomSeq* ptr ) : pointerToRndSeq( ptr ) { } THIS IS AN IMPLEMENTATION
+    //THIS IS AN IMPLEMENTATION
+    RandomSeqWrapper ( RandomSeq* ptr ) : pointerToRndSeq( ptr ) { } 
 
-    ~RandomSeqWrapper () THIS IS AN IMPLEMENTATION
+    ~RandomSeqWrapper () //THIS IS AN IMPLEMENTATION
     {
         delete pointerToRndSeq;
     }
@@ -79,9 +54,9 @@ struct RandomSeqWrapper
 //wrapper class - constructs and destructs through pointer semantics
 struct BuildNewFormWrapper
 {
-    BuildNewFormWrapper ( BuildNewForm* ptr ) : pointerToBuildNewForm( ptr ) { } THIS IS AN IMPLEMENTATION
+    BuildNewFormWrapper ( BuildNewForm* ptr ) : pointerToBuildNewForm( ptr ) { } //THIS IS AN IMPLEMENTATION
 
-    ~BuildNewFormWrapper () THIS IS AN IMPLEMENTATION
+    ~BuildNewFormWrapper () //THIS IS AN IMPLEMENTATION
     {
         delete pointerToBuildNewForm;
     }
@@ -92,9 +67,9 @@ struct BuildNewFormWrapper
 //wrapper class - constructs and destructs through pointer semantics
 struct VuMetersWrapper
 {
-    VuMetersWrapper ( VuMeters* ptr ) : pointerToVuMeters( ptr ) { } THIS IS AN IMPLEMENTATION
+    VuMetersWrapper ( VuMeters* ptr ) : pointerToVuMeters( ptr ) { } //THIS IS AN IMPLEMENTATION
 
-    ~VuMetersWrapper () THIS IS AN IMPLEMENTATION
+    ~VuMetersWrapper () //THIS IS AN IMPLEMENTATION
     {
         delete pointerToVuMeters;
     }

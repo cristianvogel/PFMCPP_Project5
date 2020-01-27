@@ -2,9 +2,38 @@
 #include <ctime>        //for random seeding
 #include <random>       //for random
 
-#include "WrapperClasses.h"
+#include "StepSequencer.h"
 
 //Implementations 
+void StepSequencer::saveWarning()  //THIS IS AN IMPLEMENTATION
+{
+    std::cout << "\x1B[7mType 'Y' to save sequencer.. \033[0m" << std::endl;
+    int saveFlag {};
+    std::cin >> saveFlag;
+    // saveToDisk function here
+    std::cout << "...saved! Quitting...";
+}
+
+std::string StepSequencer::getSeqTypeAsString()  //THIS IS AN IMPLEMENTATION
+{ 
+    return (this->isProbabilistic ? "probabilistic" : "normal"); 
+}
+
+std::string StepSequencer::getStatus( int selector ) //THIS IS AN IMPLEMENTATION
+{
+    std::ostringstream status; 
+    switch (selector)
+    {
+    case 0:
+        status << (this->isPlaying ? "playing" : "stopped"); break;
+    case 1:
+        status << this->numberOfSteps ; break;
+    case 2: 
+        status << this->getSeqTypeAsString(); break;
+    }
+    return status.str();
+}
+
 int StepSequencer::step() 
 {
     int localStepSize;
@@ -102,6 +131,11 @@ void StepSequencer::doSomethingWithStepData()
 {
     // probably make a beep
     std::cout << " \u266A ";
+}
+
+StepSequencer::StepData::~StepData()
+{
+    std::cout << "\x1B[33m\u2612\033[0m";
 }
 
 void StepSequencer::run(StepSequencer& s1 )

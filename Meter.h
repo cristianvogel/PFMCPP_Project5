@@ -1,19 +1,9 @@
 #pragma once
-// or 
-// #ifndef Meter_H
-// #define Meter_H
 
 #include <sstream> // for string stream
 
 struct Meter
 {
-    Meter() THIS IS AN IMPLEMENTATION
-    {
-        meterID = 1; peakHold = true;
-        colourPallette = 'a';
-        slewRise = 0.1f; slewFall = 0.1f;
-    }
-
     int meterID;
     bool peakHold;
     char colourPallette;
@@ -27,7 +17,6 @@ struct Meter
         float scaleFactor = {0.5f};
         int numberOfSegments =  {32};
         
-
         struct Segment
         {
             int segmentIndex;
@@ -38,15 +27,8 @@ struct Meter
             void fadeOut();
             void draw (int , float );
                        
-            Segment(); 
-
-            ~Segment() THIS IS AN IMPLEMENTATION
-            {
-                segmentIndex = -1; activeStatus = false;
-                fadeOut();
-                std::cout << "\n";
-            }
-
+            Segment();
+            ~Segment();
         };
 
         Segment m_Segment { };
@@ -54,37 +36,15 @@ struct Meter
         void updateSegment (int meterID, Segment s);
     };
 
-    //TO-DO: In-Class definitions need to get moved out for this task...
-    std::string getStatus( int selector )  THIS IS AN IMPLEMENTATION
-    {
-        std::ostringstream status;
-        switch (selector)
-        {
-            case 0:
-                status << (this->isVisible ? "visible" : "hidden"); break;
-            case 1:
-                status << this->vumeterType1.label; break;
-            case 2: 
-                status << this->segmentOpacity(); break;
-        }
-        return status.str();
-    }
+    std::string getStatus( int ); 
+    float segmentOpacity();
+    void vuMeterMain( Meter& );
 
-    void vuMeterMain(Meter& );
 
     HorizontalMeter vumeterType1 { 30, 20, 10, 150, "H_Type1" };   
     HorizontalMeter vumeterType2 { 30, 40, 10, 150, "H_Type2" }; 
 
-     //TO-DO: In-Class definitions need to get moved out for this task...
-    float segmentOpacity() { return (this->vumeterType1.m_Segment.opacity); }
+    Meter();
+    
 };
 
-//Constructor
-Meter::HorizontalMeter::Segment::Segment() : THIS IS AN IMPLEMENTATION
-                                        segmentIndex ( 0 ),
-                                        opacity ( 0.9f ),
-                                        activeStatus ( true ),
-                                        fadeFactor ( 0.001f )
-{}
-
-// #endif

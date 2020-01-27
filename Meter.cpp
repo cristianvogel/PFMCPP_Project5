@@ -1,7 +1,47 @@
 #include <iostream>
-#include "WrapperClasses.h"
+#include "Meter.h"
 
-//Implementations
+//Implementations moved from In-Class
+//THIS IS AN IMPLEMENTATION
+Meter::Meter() : 
+            meterID (1), peakHold  (true),
+            colourPallette ('a'),
+            slewRise (0.1f), slewFall  (0.1f)
+{}
+
+Meter::HorizontalMeter::Segment::~Segment() //THIS IS AN IMPLEMENTATION
+            {
+                segmentIndex = -1; activeStatus = false;
+                fadeOut();
+                std::cout << "\n";
+            }
+std::string Meter::getStatus( int selector )  //THIS IS AN IMPLEMENTATION
+    {
+        std::ostringstream status;
+        switch (selector)
+        {
+            case 0:
+                status << (this->isVisible ? "visible" : "hidden"); break;
+            case 1:
+                status << this->vumeterType1.label; break;
+            case 2: 
+                status << this->segmentOpacity(); break;
+        }
+        return status.str();
+    }
+float Meter::segmentOpacity() 
+{ 
+    return (this->vumeterType1.m_Segment.opacity); 
+}
+Meter::HorizontalMeter::Segment::Segment() : //THIS IS AN IMPLEMENTATION
+                                        segmentIndex ( 0 ),
+                                        opacity ( 0.9f ),
+                                        activeStatus ( true ),
+                                        fadeFactor ( 0.001f )
+{}
+
+
+
 void Meter::HorizontalMeter::updateSegment (int, Meter::HorizontalMeter::Segment)
 {
     //update segment graphics style

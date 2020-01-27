@@ -13,7 +13,7 @@ struct StepSequencer
         **/
         struct PitchClass 
         {
-            PitchClass() THIS IS AN IMPLEMENTATION
+            PitchClass() //THIS IS AN IMPLEMENTATION
             {
                 frequency = 440;
                //TODO: pitch = pitchFromFreq (frequency);
@@ -34,10 +34,8 @@ struct StepSequencer
         double duration = 1.0;
 
         StepData(); //Declaration of Constructor
-        ~StepData() THIS IS AN IMPLEMENTATION
-        {
-            std::cout << "\x1B[33m\u2612\033[0m";
-        }
+        ~StepData();
+
     };
 
     int getCurrentStage (unsigned int id);
@@ -59,53 +57,31 @@ struct StepSequencer
     void play (StepSequencer&);
     void doSomethingWithStepData();
 
-    //TO-DO: In-Class definitions need to get moved out for this task...
-    void saveWarning()  THIS IS AN IMPLEMENTATION
-    {
-        std::cout << "\x1B[7mType 'Y' to save sequencer.. \033[0m" << std::endl;
-        int saveFlag {};
-        std::cin >> saveFlag;
-        // saveToDisk function here
-        std::cout << "...saved! Quitting...";
-    }
-
-    std::string getSeqTypeAsString()  THIS IS AN IMPLEMENTATION
-    { 
-        return (this->isProbabilistic ? "probabilistic" : "normal"); 
-    }
-
-    std::string getStatus( int selector ) THIS IS AN IMPLEMENTATION
-    {
-        std::ostringstream status; //implicitly defined error??
-        switch (selector)
-        {
-            case 0:
-                status << (this->isPlaying ? "playing" : "stopped"); break;
-            case 1:
-                status << this->numberOfSteps ; break;
-            case 2: 
-                status << this->getSeqTypeAsString(); break;
-        }
-        return status.str();
-    }
+    void saveWarning();
+    std::string getSeqTypeAsString();
+    std::string getStatus( int );
 
     StepSequencer();
+    ~StepSequencer();
 };
 
 //Constructors
-StepSequencer::StepData::StepData() : THIS IS AN IMPLEMENTATION
+//THIS IS AN IMPLEMENTATION
+StepSequencer::StepData::StepData() : 
                                 currentStage ( 0 ),
                                 gateStatus ( true ),
                                 duration ( 1.0 )                            
 { 
     std::cout << "\x1B[33m\u2610\033[0m";
 }
-
-StepSequencer::StepSequencer() : THIS IS AN IMPLEMENTATION
+//THIS IS AN IMPLEMENTATION
+StepSequencer::StepSequencer() : 
                                 isPlaying ( false ),
                                 numberOfSteps ( 8 ),
                                 tempo ( 120 ),
                                 id ( 1 ),   
                                 isBackwards ( false )
-{ std::cout << "Sequencer defined..."; }
+{ 
+    std::cout << "Sequencer defined..."; 
+}
 
