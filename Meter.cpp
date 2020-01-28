@@ -1,22 +1,33 @@
 #include <iostream>
-//#include "Meter.h"
-#include "WrapperClasses.h"
+#include "Meter.h"
+
+VuMeters::VuMeters() 
+{
+    vu.vuMeterMain(vu);
+}
+
+VuMeters::~VuMeters() 
+{
+    std::cout << "\n Destructing Meter Segments \n\n";
+}
+
 
 //Implementations moved from In-Class
-//THIS IS AN IMPLEMENTATION
+
 Meter::Meter() : 
             meterID (1), peakHold  (true),
             colourPallette ('a'),
             slewRise (0.1f), slewFall  (0.1f)
 {}
 
-Meter::HorizontalMeter::Segment::~Segment() //THIS IS AN IMPLEMENTATION
+Meter::HorizontalMeter::Segment::~Segment() 
             {
                 segmentIndex = -1; activeStatus = false;
                 fadeOut();
                 std::cout << "\n";
             }
-std::string Meter::getStatus( int selector )  //THIS IS AN IMPLEMENTATION
+
+std::string Meter::getStatus( int selector )  
     {
         std::ostringstream status;
         switch (selector)
@@ -34,14 +45,12 @@ float Meter::segmentOpacity()
 { 
     return (this->vumeterType1.m_Segment.opacity); 
 }
-Meter::HorizontalMeter::Segment::Segment() : //THIS IS AN IMPLEMENTATION
+Meter::HorizontalMeter::Segment::Segment() : 
                                         segmentIndex ( 0 ),
                                         opacity ( 0.9f ),
                                         activeStatus ( true ),
                                         fadeFactor ( 0.001f )
 {}
-
-
 
 void Meter::HorizontalMeter::updateSegment (int, Meter::HorizontalMeter::Segment)
 {
@@ -83,3 +92,4 @@ void Meter::vuMeterMain(Meter & vu)
     << "\nSegment destructor fades out graphics -> \n"; 
     std::cout << "\n";   
 } 
+

@@ -42,10 +42,13 @@
 #include "ConsoleFormatting.h"
 #include "StaticVariables.h"
 #include "WrapperClasses.h"
-
+#include "Form.h"
+#include "Meter.h"
+#include "StepSequencer.h"
 
 int main()
 {
+    
     br();
 
     BuildNewFormWrapper formWithFields ( new BuildNewForm(5) );

@@ -1,38 +1,12 @@
 #include <iostream>
 #include "WrapperClasses.h"
 
-RandomSeq::RandomSeq() //THIS IS AN IMPLEMENTATION
-{  
-    seq.isProbabilistic = false;
-    seq.isPlaying = false;
-    seq.run(seq);
-} 
 
-RandomSeq::~RandomSeq() //THIS IS AN IMPLEMENTATION
-{
-    std::cout << "\n Destructing Sequencer... \n";
-    seq.saveWarning();
-}
+BuildNewFormWrapper::BuildNewFormWrapper ( BuildNewForm* ptr ) : pointerToBuildNewForm( ptr ) {} 
+BuildNewFormWrapper::~BuildNewFormWrapper () { delete pointerToBuildNewForm; }
 
-BuildNewForm::BuildNewForm(int i)
-{
-    form.isVisible = true;
-    form.fields = i;
-    form.mainForm(form);
-}
+RandomSeqWrapper::RandomSeqWrapper ( RandomSeq* ptr ) : pointerToRndSeq( ptr ) {} 
+RandomSeqWrapper::~RandomSeqWrapper() { delete pointerToRndSeq; }
 
-BuildNewForm::~BuildNewForm( ) //THIS IS AN IMPLEMENTATION
-{
-    form.isVisible = false;
-    std::cout << "\n\nDestructing Form.\n";
-}
-
-VuMeters::VuMeters() //THIS IS AN IMPLEMENTATION
-{
-    vu.vuMeterMain(vu);
-}
-
-VuMeters::~VuMeters() //THIS IS AN IMPLEMENTATION
-{
-    std::cout << "\n Destructing Meter Segments \n\n";
-}
+VuMetersWrapper::VuMetersWrapper ( VuMeters* ptr ) : pointerToVuMeters( ptr ) {} 
+VuMetersWrapper::~VuMetersWrapper () { delete pointerToVuMeters; }

@@ -1,6 +1,8 @@
 #pragma once
 
 #include <sstream> // for string stream
+#include "LeakedObjectDetector.h"
+#include <cassert>
 
 struct Form 
 { 
@@ -51,11 +53,15 @@ struct Form
 
     Form();
     Form( int );
-
     ~Form();
-
 };
 
+struct BuildNewForm
+{
+    Form form;
 
+    BuildNewForm(int i);
+    ~BuildNewForm();
 
-
+    JUCE_LEAK_DETECTOR( BuildNewForm )
+};

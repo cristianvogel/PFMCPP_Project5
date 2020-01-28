@@ -1,6 +1,8 @@
 #pragma once
 
 #include <sstream> // for string stream
+#include <cassert>
+#include "LeakedObjectDetector.h"
 
 struct StepSequencer
 {
@@ -12,8 +14,7 @@ struct StepSequencer
         but leaving as is for now....
         **/
         struct PitchClass 
-        {
-            
+        {     
             double frequency;
             char pitch;
             
@@ -62,23 +63,16 @@ struct StepSequencer
     ~StepSequencer();
 };
 
-//Constructors
-//THIS IS AN IMPLEMENTATION
-StepSequencer::StepData::StepData() : 
-                                currentStage ( 0 ),
-                                gateStatus ( true ),
-                                duration ( 1.0 )                            
-{ 
-    std::cout << "\x1B[33m\u2610\033[0m";
-}
-//THIS IS AN IMPLEMENTATION
-StepSequencer::StepSequencer() : 
-                                isPlaying ( false ),
-                                numberOfSteps ( 8 ),
-                                tempo ( 120 ),
-                                id ( 1 ),   
-                                isBackwards ( false )
-{ 
-    std::cout << "Sequencer defined..."; 
-}
+
+struct RandomSeq
+{
+    StepSequencer seq;
+    RandomSeq();
+    ~RandomSeq();
+
+    JUCE_LEAK_DETECTOR( RandomSeq )
+};
+
+
+
 

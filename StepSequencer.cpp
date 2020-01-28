@@ -2,11 +2,42 @@
 #include <ctime>        //for random seeding
 #include <random>       //for random
 
-FIXME include StepSequencer.h not WrapperClasses.h
-#include "WrapperClasses.h"
+#include "StepSequencer.h"
 
 //Implementations 
-void StepSequencer::saveWarning()  //THIS IS AN IMPLEMENTATION
+
+RandomSeq::RandomSeq() 
+{  
+    seq.isProbabilistic = false;
+    seq.isPlaying = false;
+    seq.run(seq);
+} 
+
+RandomSeq::~RandomSeq() 
+{
+    std::cout << "\n Destructing Sequencer... \n";
+    seq.saveWarning();
+}
+
+StepSequencer::StepData::StepData() : 
+                                currentStage ( 0 ),
+                                gateStatus ( true ),
+                                duration ( 1.0 )                            
+{ 
+    std::cout << "\x1B[33m\u2610\033[0m";
+}
+
+StepSequencer::StepSequencer() : 
+                                isPlaying ( false ),
+                                numberOfSteps ( 8 ),
+                                tempo ( 120 ),
+                                id ( 1 ),   
+                                isBackwards ( false )
+{ 
+    std::cout << "Sequencer defined..."; 
+}
+
+void StepSequencer::saveWarning()  
 {
     std::cout << "\x1B[7mType 'Y' to save sequencer.. \033[0m" << std::endl;
     int saveFlag {};
@@ -15,12 +46,12 @@ void StepSequencer::saveWarning()  //THIS IS AN IMPLEMENTATION
     std::cout << "...saved! Quitting...";
 }
 
-std::string StepSequencer::getSeqTypeAsString()  //THIS IS AN IMPLEMENTATION
+std::string StepSequencer::getSeqTypeAsString()  
 { 
     return (this->isProbabilistic ? "probabilistic" : "normal"); 
 }
 
-std::string StepSequencer::getStatus( int selector ) //THIS IS AN IMPLEMENTATION
+std::string StepSequencer::getStatus( int selector ) 
 {
     std::ostringstream status; 
     switch (selector)

@@ -1,6 +1,9 @@
 #pragma once
 
+#include <iostream>
 #include <sstream> // for string stream
+#include <cassert>
+#include "LeakedObjectDetector.h"
 
 struct Meter
 {
@@ -40,11 +43,18 @@ struct Meter
     float segmentOpacity();
     void vuMeterMain( Meter& );
 
-
     HorizontalMeter vumeterType1 { 30, 20, 10, 150, "H_Type1" };   
-    HorizontalMeter vumeterType2 { 30, 40, 10, 150, "H_Type2" }; 
+    HorizontalMeter vumeterType2 { 30, 40, 10, 150, "H_Type2" };  
 
     Meter();
-    
 };
 
+struct VuMeters
+{
+    Meter vu;
+
+    VuMeters();
+    ~VuMeters();
+
+    JUCE_LEAK_DETECTOR( VuMeters )
+};

@@ -1,5 +1,18 @@
 #include <iostream>
-#include "WrapperClasses.h"
+#include "Form.h"
+
+BuildNewForm::BuildNewForm(int i)
+    {
+        form.isVisible = true;
+        form.fields = i;
+        form.mainForm(form);
+    }
+
+BuildNewForm::~BuildNewForm( )
+{
+    form.isVisible = false;
+    std::cout << "\n\nDestructing Form.\n";
+}
 
 //implementations moved from Struct def...
 std::string Form::getStatus( int selector )  
