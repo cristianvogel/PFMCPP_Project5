@@ -1,6 +1,5 @@
 #include <iostream>
-#include "Form.h"
-
+#include "WrapperClasses.h"
 
 //implementations moved from Struct def...
 std::string Form::getStatus( int selector )  

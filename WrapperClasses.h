@@ -7,7 +7,6 @@
 #include "Form.h"
 #include "Meter.h"
 
-
 struct RandomSeq
 {
     StepSequencer seq;
@@ -23,7 +22,7 @@ struct BuildNewForm
 
     BuildNewForm(int i);
     ~BuildNewForm();
-    
+
     JUCE_LEAK_DETECTOR(BuildNewForm)
 };
 

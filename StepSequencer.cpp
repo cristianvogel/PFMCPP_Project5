@@ -2,7 +2,8 @@
 #include <ctime>        //for random seeding
 #include <random>       //for random
 
-#include "StepSequencer.h"
+FIXME include StepSequencer.h not WrapperClasses.h
+#include "WrapperClasses.h"
 
 //Implementations 
 void StepSequencer::saveWarning()  //THIS IS AN IMPLEMENTATION
@@ -137,6 +138,11 @@ StepSequencer::StepData::~StepData()
 {
     std::cout << "\x1B[33m\u2612\033[0m";
 }
+
+StepSequencer::StepData::PitchClass::PitchClass() :       
+                                     frequency (440),
+                                     pitch ('A')
+{}
 
 void StepSequencer::run(StepSequencer& s1 )
 {

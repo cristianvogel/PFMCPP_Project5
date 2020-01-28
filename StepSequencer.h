@@ -13,16 +13,13 @@ struct StepSequencer
         **/
         struct PitchClass 
         {
-            PitchClass() //THIS IS AN IMPLEMENTATION
-            {
-                frequency = 440;
-               //TODO: pitch = pitchFromFreq (frequency);
-                pitch = 'A';
-            }
+            
             double frequency;
             char pitch;
             
             char pitchFromFreq (double);
+
+            PitchClass();
         };
         
         int currentStage = { 1 };

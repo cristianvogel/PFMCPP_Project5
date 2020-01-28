@@ -44,11 +44,6 @@
 #include "WrapperClasses.h"
 
 
-//do I need forward type declarations???
-//struct Form;
-//struct StepSequencer;
-//struct Meter;
-
 int main()
 {
     br();
