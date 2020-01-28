@@ -2,8 +2,8 @@
 
 #include <iostream>
 
-struct RandomSeq;
 struct BuildNewForm;
+struct RandomSeq;
 struct VuMeters;
 
 //wrapper class - constructs and destructs through pointer semantics

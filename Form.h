@@ -35,12 +35,6 @@ struct Form
         TextField(); 
     };
 
-    //CheckBox checkBox;
-    /*
-    Didn't need this extra CheckBox object in Form:: scope
-    accessed nested CheckBox class through TextField fullName 
-    which owns a CheckBox called checkBox
-    */
     TextField fullName;
    
     void mainForm( Form& );
@@ -56,12 +50,4 @@ struct Form
     ~Form();
 };
 
-struct BuildNewForm
-{
-    Form form;
 
-    BuildNewForm(int i);
-    ~BuildNewForm();
-
-    JUCE_LEAK_DETECTOR( BuildNewForm )
-};

@@ -8,11 +8,6 @@ struct StepSequencer
 {
     struct StepData
     {
-        /** 
-        I don't think PitchClass should be a nested nested struct anymore
-        makes things difficult without proper member access privelages
-        but leaving as is for now....
-        **/
         struct PitchClass 
         {     
             double frequency;
@@ -33,7 +28,6 @@ struct StepSequencer
 
         StepData(); //Declaration of Constructor
         ~StepData();
-
     };
 
     int getCurrentStage (unsigned int id);

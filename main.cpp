@@ -36,32 +36,33 @@
          just split it up into source files and provide the appropriate #include directives.
  */
 
-#include <iostream>
-#include <sstream> // for string stream 'ostream'
+// #include <iostream>
+// #include <sstream> // for string stream 'ostream'
 
-#include "ConsoleFormatting.h"
-#include "StaticVariables.h"
+// #include "ConsoleFormatting.h"
+// #include "StaticVariables.h"
 #include "WrapperClasses.h"
-#include "Form.h"
-#include "Meter.h"
-#include "StepSequencer.h"
+#include "BuildNewForm.h"
+// #include "Form.h"
+// #include "Meter.h"
+// #include "StepSequencer.h"
 
 int main()
 {
     
-    br();
+    // br();
 
     BuildNewFormWrapper formWithFields ( new BuildNewForm(5) );
 
-    std::cout 
-    << "Form with field count of " 
-    << formWithFields.pointerToBuildNewForm->form.getStatus( CHARACTERISTIC ) 
-    << " and check-box style "
-    << formWithFields.pointerToBuildNewForm->form.getStatus( STYLE )
-    << " is " 
-    << colour(3,formWithFields.pointerToBuildNewForm->form.getStatus( VISIBILITY )) 
-    << '\n';
-    br();
+    // std::cout 
+    // << "Form with field count of " 
+    // << formWithFields.pointerToBuildNewForm->form.getStatus( CHARACTERISTIC ) 
+    // << " and check-box style "
+    // << formWithFields.pointerToBuildNewForm->form.getStatus( STYLE )
+    // << " is " 
+    // << colour(3,formWithFields.pointerToBuildNewForm->form.getStatus( VISIBILITY )) 
+    // << '\n';
+    // br();
 
     // VuMetersWrapper meters (new VuMeters() );
 
