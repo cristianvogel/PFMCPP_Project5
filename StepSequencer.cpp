@@ -27,6 +27,13 @@ StepSequencer::~StepSequencer() // Definition of StepSequencer Destructor
 {
     std::cout << "Sequencer destructed...";
 }
+
+StepSequencer::StepData::PitchClass::PitchClass() 
+{
+    frequency = 440;
+    pitch = 'A';
+}
+
 void StepSequencer::saveWarning() 
 {
     std::cout << "\x1B[7mType 'Y' to save sequencer.. \033[0m" << std::endl;

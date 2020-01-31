@@ -7,6 +7,20 @@ Meter::HorizontalMeter::Segment::Segment() :
                                         fadeFactor ( 0.001f )
 {}
 
+Meter::HorizontalMeter::Segment::~Segment()
+{
+    segmentIndex = -1; activeStatus = false;
+    fadeOut();
+    std::cout << "\n";
+}
+
+Meter::Meter() 
+{
+    meterID = 1; peakHold = true;
+    colourPallette = 'a';
+    slewRise = 0.1f; slewFall = 0.1f;
+}
+
 std::string Meter::getStatus(int selector)
 {
     std::ostringstream status;

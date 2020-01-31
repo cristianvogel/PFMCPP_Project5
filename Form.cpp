@@ -25,6 +25,7 @@ Form::~Form()
     std::cout << "Form with " << fields << " fields Destructing...\n";
 }
 
+Form::CheckBox::CheckBox() { size = 16.0f; icon = "\u25A3"; } 
 Form::CheckBox::CheckBox (float s) : size (s) {}
 
 Form::CheckBox::~CheckBox()

@@ -11,7 +11,7 @@ struct Form
     
     struct CheckBox
     {
-        CheckBox() { size = 16.0f; icon = "\u25A3"; }    FIXME no in class implementation
+        CheckBox();  
         CheckBox ( float ) ;
         ~CheckBox();
 

@@ -9,11 +9,8 @@ struct StepSequencer
     {
         struct PitchClass 
         {
-            PitchClass() FIXME no in class implementation
-            {
-                frequency = 440;
-                pitch = 'A';
-            }
+            PitchClass(); 
+
             double frequency;
             char pitch;
             
@@ -31,8 +28,6 @@ struct StepSequencer
     };
 
     int getCurrentStage (unsigned int id);
-    
-    //StepData stepData;
     StepData interpretStageData (int );
 
     bool isPlaying;

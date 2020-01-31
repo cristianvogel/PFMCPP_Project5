@@ -5,12 +5,7 @@
 
 struct Meter
 {
-    Meter() FIXME no in class implementation
-    {
-        meterID = 1; peakHold = true;
-        colourPallette = 'a';
-        slewRise = 0.1f; slewFall = 0.1f;
-    }
+    Meter();
 
     int meterID;
     bool peakHold;
@@ -36,12 +31,7 @@ struct Meter
             void draw (int , float );
                        
             Segment(); 
-            ~Segment() FIXME no in class implementation
-            {
-                segmentIndex = -1; activeStatus = false;
-                fadeOut();
-                std::cout << "\n";
-            }
+            ~Segment();
         };
 
         Segment m_Segment {} ; 
