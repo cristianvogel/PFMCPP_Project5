@@ -9,7 +9,7 @@ struct StepSequencer
     {
         struct PitchClass 
         {
-            PitchClass()
+            PitchClass() FIXME no in class implementation
             {
                 frequency = 440;
                 pitch = 'A';

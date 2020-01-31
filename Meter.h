@@ -5,7 +5,7 @@
 
 struct Meter
 {
-    Meter()
+    Meter() FIXME no in class implementation
     {
         meterID = 1; peakHold = true;
         colourPallette = 'a';
@@ -36,7 +36,7 @@ struct Meter
             void draw (int , float );
                        
             Segment(); 
-            ~Segment()
+            ~Segment() FIXME no in class implementation
             {
                 segmentIndex = -1; activeStatus = false;
                 fadeOut();
